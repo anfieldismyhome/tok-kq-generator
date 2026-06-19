@@ -1,6 +1,7 @@
 async function generateKQ() {
 
-const url = document.getElementById("urlInput").value.trim();
+const url =
+    document.getElementById("urlInput").value.trim();
 
 const userType =
     document.getElementById("userType").value;
@@ -25,7 +26,8 @@ if (!url) {
     return;
 }
 
-loading.innerHTML = "Analyzing source...";
+loading.innerHTML =
+    "Analyzing source...";
 
 results.innerHTML = "";
 
@@ -51,25 +53,21 @@ try {
 
     loading.innerHTML = "";
 
-    results.innerHTML = `
-        <div class="result-section">
-            <h2>Worker Response</h2>
-            <pre>${data.result}</pre>
-        </div>
-    `;
+    results.innerHTML =
+        "<div class='result-section'><pre>" +
+        JSON.stringify(data, null, 2) +
+        "</pre></div>";
 
-    console.log(data);
+}
 
-} catch (error) {
+catch (error) {
 
     loading.innerHTML = "";
 
-    results.innerHTML = `
-        <div class="error-box">
-            ${error.message}
-        </div>
-    `;
-
+    results.innerHTML =
+        "<div class='error-box'>" +
+        error.message +
+        "</div>";
 }
 
 }
