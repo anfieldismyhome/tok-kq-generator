@@ -1,72 +1,74 @@
 async function generateKQ() {
 
-```
-const url = document.getElementById("urlInput").value.trim();
+    const url = document.getElementById("urlInput").value.trim();
 
-const userType =
-    document.getElementById("userType").value;
+    const userType =
+        document.getElementById("userType").value;
 
-const analysisType =
-    document.getElementById("analysisType").value;
+    const analysisType =
+        document.getElementById("analysisType").value;
 
-const sourceType =
-    document.getElementById("sourceType").value;
+    const sourceType =
+        document.getElementById("sourceType").value;
 
-const loading =
-    document.getElementById("loading");
+    const loading =
+        document.getElementById("loading");
 
-const results =
-    document.getElementById("results");
+    const results =
+        document.getElementById("results");
 
-if (!url) {
+    if (!url) {
 
-    results.innerHTML =
-        "<div class='error-box'>Please enter a URL.</div>";
+        results.innerHTML =
+            "<div class='error-box'>Please enter a URL.</div>";
 
-    return;
-}
+        return;
+    }
 
-loading.innerHTML =
-    "Analyzing source...";
+    loading.innerHTML = "Analyzing source...";
 
-results.innerHTML = "";
+    results.innerHTML = "";
 
-try {
+    try {
 
-    const response = await fetch(
-        "https://tok-kq-worker.zubinjcoach.workers.dev/",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                url,
-                userType,
-                analysisType,
-                sourceType
-            })
-        }
-    );
+        const response = await fetch(
+            "https://tok-kq-worker.zubinjcoach.workers.dev/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    url,
+                    userType,
+                    analysisType,
+                    sourceType
+                })
+            }
+        );
 
-    const data = await response.json();
+        const data = await response.json();
 
-    loading.innerHTML = "";
+        loading.innerHTML = "";
 
-    results.innerHTML =
-        "<div class='result-section'><h2>Response Received</h2><p>Worker connection successful.</p></div>";
+        results.innerHTML = `
+            <div class="result-section">
+                <h2>Response Received</h2>
+                <p>Worker connection successful.</p>
+            </div>
+        `;
 
-    console.log(data);
+        console.log(data);
 
-} catch (error) {
+    } catch (error) {
 
-    loading.innerHTML = "";
+        loading.innerHTML = "";
 
-    results.innerHTML =
-        "<div class='error-box'>" +
-        error.message +
-        "</div>";
-}
-```
+        results.innerHTML = `
+            <div class="error-box">
+                ${error.message}
+            </div>
+        `;
+    }
 
 }
