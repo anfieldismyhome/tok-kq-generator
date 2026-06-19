@@ -25,6 +25,8 @@ async function generateKQ() {
 
         const data = await response.json();
 
+        console.log(data);
+
         const parsed = JSON.parse(data.result);
 
         loading.innerHTML = "";
