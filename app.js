@@ -29,6 +29,8 @@ async function generateKQ() {
 
         const parsed = JSON.parse(data.result);
 
+        alert("JSON parsed successfully");
+
         loading.innerHTML = "";
 
         results.innerHTML = `
