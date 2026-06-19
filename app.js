@@ -52,45 +52,12 @@ async function generateKQ() {
 
         loading.innerHTML = "";
 
-        let html = "";
-
-        if (data.sourceTitle) {
-
-            html += `
-                <div class="result-section">
-                    <h2>${data.sourceTitle}</h2>
-                    <p>${data.summary || ""}</p>
-                </div>
-            `;
-        }
-
-        if (data.sections) {
-
-            data.sections.forEach(section => {
-
-                html += `
-                    <div class="result-section">
-                        <h2>${section.title}</h2>
-                        <ul>
-                            ${section.items
-                                .map(item => `<li>${item}</li>`)
-                                .join("")}
-                        </ul>
-                    </div>
-                `;
-
-            });
-
-        } else {
-
-            html += `
-                <div class="error-box">
-                    No sections returned.
-                </div>
-            `;
-        }
-
-        results.innerHTML = html;
+        results.innerHTML = `
+            <div class="result-section">
+                <h2>Raw Worker Response</h2>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            </div>
+        `;
 
         console.log(data);
 
@@ -100,9 +67,13 @@ async function generateKQ() {
 
         results.innerHTML = `
             <div class="error-box">
+                <strong>Error:</strong><br>
                 ${error.message}
             </div>
         `;
+
+        console.error(error);
+
     }
 
 }
