@@ -1,106 +1,72 @@
 async function generateKQ() {
 
-    const url = document.getElementById("urlInput").value.trim();
+```
+const url = document.getElementById("urlInput").value.trim();
 
-    const loading = document.getElementById("loading");
+const userType =
+    document.getElementById("userType").value;
 
-    const results = document.getElementById("results");
+const analysisType =
+    document.getElementById("analysisType").value;
 
-    if (!url) {
-        results.innerHTML =
-        "<div class='error-box'>Please paste a URL.</div>";
-        return;
-    }
+const sourceType =
+    document.getElementById("sourceType").value;
 
-    loading.innerHTML = "Analyzing source...";
-    results.innerHTML = "";
+const loading =
+    document.getElementById("loading");
 
-    try {
+const results =
+    document.getElementById("results");
 
-        const response = await fetch(
-            "https://tok-kq-worker.zubinjcoach.workers.dev/",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ url })
-            }
-        );
+if (!url) {
 
-        const data = await response.json();
+    results.innerHTML =
+        "<div class='error-box'>Please enter a URL.</div>";
 
-        const parsed = JSON.parse(data.result);
+    return;
+}
 
-        loading.innerHTML = "";
+loading.innerHTML =
+    "Analyzing source...";
 
-        const section = (title, items, ordered = false) => `
-            <div class="result-section">
-                <h2>${title}</h2>
-                ${
-                    ordered
-                    ? `<ol>${items.map(i => `<li>${i}</li>`).join("")}</ol>`
-                    : `<ul>${items.map(i => `<li>${i}</li>`).join("")}</ul>`
-                }
-            </div>
-        `;
+results.innerHTML = "";
 
-        results.innerHTML = `
-            <div class="results-grid">
+try {
 
-                ${section(
-                    "Knowledge Questions",
-                    parsed.knowledgeQuestions || [],
-                    true
-                )}
+    const response = await fetch(
+        "https://tok-kq-worker.zubinjcoach.workers.dev/",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                url,
+                userType,
+                analysisType,
+                sourceType
+            })
+        }
+    );
 
-                ${section(
-                    "Discussion Questions",
-                    parsed.discussionQuestions || [],
-                    true
-                )}
+    const data = await response.json();
 
-                ${section(
-                    "Knowledge Claims",
-                    parsed.knowledgeClaims || []
-                )}
+    loading.innerHTML = "";
 
-                ${section(
-                    "Counterclaims",
-                    parsed.counterclaims || []
-                )}
+    results.innerHTML =
+        "<div class='result-section'><h2>Response Received</h2><p>Worker connection successful.</p></div>";
 
-                ${section(
-                    "Perspectives",
-                    parsed.perspectives || []
-                )}
+    console.log(data);
 
-                ${section(
-                    "Biases",
-                    parsed.biases || []
-                )}
+} catch (error) {
 
-                ${section(
-                    "TOK Concepts",
-                    parsed.tokConcepts || []
-                )}
+    loading.innerHTML = "";
 
-                ${section(
-                    "Exhibition Connections",
-                    parsed.exhibitionConnections || []
-                )}
+    results.innerHTML =
+        "<div class='error-box'>" +
+        error.message +
+        "</div>";
+}
+```
 
-            </div>
-        `;
-
-    } catch (error) {
-
-        loading.innerHTML = "";
-
-        results.innerHTML = `
-            <div class="error-box">
-                ${error.message}
-            </div>
-        `;
-    }
 }
