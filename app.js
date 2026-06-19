@@ -1,33 +1,39 @@
-async function generateKQ(){
+async function generateKQ() {
 
-const url =
-document.getElementById("urlInput").value;
+    const url = document.getElementById("urlInput").value;
 
-const loading =
-document.getElementById("loading");
+    const loading = document.getElementById("loading");
 
-const results =
-document.getElementById("results");
+    const results = document.getElementById("results");
 
-loading.innerHTML = "Analyzing...";
+    loading.innerHTML = "Analyzing source...";
 
-results.innerHTML = "";
+    results.innerHTML = "";
 
-const response = await fetch(
-"https://YOUR-WORKER.workers.dev/analyze",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({url})
-}
-);
+    try {
 
-const data = await response.json();
+        const response = await fetch(
+            "https://tok-kq-worker.zubinjcoach.workers.dev/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ url })
+            }
+        );
 
-loading.innerHTML = "";
+        const data = await response.json();
 
-results.innerHTML = data.result;
+        loading.innerHTML = "";
 
+        results.innerHTML = data.result;
+
+    } catch (error) {
+
+        loading.innerHTML = "";
+
+        results.innerHTML =
+            "Error: " + error.message;
+    }
 }
