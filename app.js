@@ -25,55 +25,67 @@ async function generateKQ() {
 
         const data = await response.json();
 
-        console.log(data);
-
         const parsed = JSON.parse(data.result);
-
-        alert("JSON parsed successfully");
 
         loading.innerHTML = "";
 
         results.innerHTML = `
 
-        <h2>Knowledge Questions</h2>
-        <ol>
-            ${parsed.knowledgeQuestions.map(item => `<li>${item}</li>`).join("")}
-        </ol>
+        <div class="result-section">
+            <h2>Knowledge Questions</h2>
+            <ol>
+                ${parsed.knowledgeQuestions.map(item => `<li>${item}</li>`).join("")}
+            </ol>
+        </div>
 
-        <h2>Discussion Questions</h2>
-        <ol>
-            ${parsed.discussionQuestions.map(item => `<li>${item}</li>`).join("")}
-        </ol>
+        <div class="result-section">
+            <h2>Discussion Questions</h2>
+            <ol>
+                ${parsed.discussionQuestions.map(item => `<li>${item}</li>`).join("")}
+            </ol>
+        </div>
 
-        <h2>Knowledge Claims</h2>
-        <ul>
-            ${parsed.knowledgeClaims.map(item => `<li>${item}</li>`).join("")}
-        </ul>
+        <div class="result-section">
+            <h2>Knowledge Claims</h2>
+            <ul>
+                ${parsed.knowledgeClaims.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        </div>
 
-        <h2>Counterclaims</h2>
-        <ul>
-            ${parsed.counterclaims.map(item => `<li>${item}</li>`).join("")}
-        </ul>
+        <div class="result-section">
+            <h2>Counterclaims</h2>
+            <ul>
+                ${parsed.counterclaims.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        </div>
 
-        <h2>Perspectives</h2>
-        <ul>
-            ${parsed.perspectives.map(item => `<li>${item}</li>`).join("")}
-        </ul>
+        <div class="result-section">
+            <h2>Perspectives</h2>
+            <ul>
+                ${parsed.perspectives.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        </div>
 
-        <h2>Biases</h2>
-        <ul>
-            ${parsed.biases.map(item => `<li>${item}</li>`).join("")}
-        </ul>
+        <div class="result-section">
+            <h2>Biases</h2>
+            <ul>
+                ${parsed.biases.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        </div>
 
-        <h2>TOK Concepts</h2>
-        <ul>
-            ${parsed.tokConcepts.map(item => `<li>${item}</li>`).join("")}
-        </ul>
+        <div class="result-section">
+            <h2>TOK Concepts</h2>
+            <ul>
+                ${parsed.tokConcepts.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        </div>
 
-        <h2>Exhibition Connections</h2>
-        <ul>
-            ${parsed.exhibitionConnections.map(item => `<li>${item}</li>`).join("")}
-        </ul>
+        <div class="result-section">
+            <h2>Exhibition Prompt Connections</h2>
+            <ul>
+                ${parsed.exhibitionConnections.map(item => `<li>${item}</li>`).join("")}
+            </ul>
+        </div>
 
         `;
 
@@ -82,6 +94,8 @@ async function generateKQ() {
         loading.innerHTML = "";
 
         results.innerHTML =
-            "<strong>Error:</strong><br>" + error.message;
+            "<div class='error-box'><strong>Error:</strong> " +
+            error.message +
+            "</div>";
     }
 }
