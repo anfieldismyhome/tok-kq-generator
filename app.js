@@ -31,62 +31,65 @@ async function generateKQ() {
 
         results.innerHTML = `
 
-        <div class="result-section">
-            <h2>Knowledge Questions</h2>
-            <ol>
-                ${parsed.knowledgeQuestions.map(item => `<li>${item}</li>`).join("")}
-            </ol>
-        </div>
+        <div class="results-grid">
 
-        <div class="result-section">
-            <h2>Discussion Questions</h2>
-            <ol>
-                ${parsed.discussionQuestions.map(item => `<li>${item}</li>`).join("")}
-            </ol>
-        </div>
+            <div class="result-section">
+                <h2>Knowledge Questions</h2>
+                <ol>
+                    ${parsed.knowledgeQuestions.map(item => `<li>${item}</li>`).join("")}
+                </ol>
+            </div>
 
-        <div class="result-section">
-            <h2>Knowledge Claims</h2>
-            <ul>
-                ${parsed.knowledgeClaims.map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        </div>
+            <div class="result-section">
+                <h2>Discussion Questions</h2>
+                <ol>
+                    ${parsed.discussionQuestions.map(item => `<li>${item}</li>`).join("")}
+                </ol>
+            </div>
 
-        <div class="result-section">
-            <h2>Counterclaims</h2>
-            <ul>
-                ${parsed.counterclaims.map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        </div>
+            <div class="result-section">
+                <h2>Knowledge Claims</h2>
+                <ul>
+                    ${parsed.knowledgeClaims.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
 
-        <div class="result-section">
-            <h2>Perspectives</h2>
-            <ul>
-                ${parsed.perspectives.map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        </div>
+            <div class="result-section">
+                <h2>Counterclaims</h2>
+                <ul>
+                    ${parsed.counterclaims.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
 
-        <div class="result-section">
-            <h2>Biases</h2>
-            <ul>
-                ${parsed.biases.map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        </div>
+            <div class="result-section">
+                <h2>Perspectives</h2>
+                <ul>
+                    ${parsed.perspectives.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
 
-        <div class="result-section">
-            <h2>TOK Concepts</h2>
-            <ul>
-                ${parsed.tokConcepts.map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        </div>
+            <div class="result-section">
+                <h2>Biases</h2>
+                <ul>
+                    ${parsed.biases.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
 
-        <div class="result-section">
-            <h2>Exhibition Prompt Connections</h2>
-            <ul>
-                ${parsed.exhibitionConnections.map(item => `<li>${item}</li>`).join("")}
-            </ul>
-        </div>
+            <div class="result-section">
+                <h2>TOK Concepts</h2>
+                <ul>
+                    ${parsed.tokConcepts.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
 
+            <div class="result-section">
+                <h2>Exhibition Connections</h2>
+                <ul>
+                    ${parsed.exhibitionConnections.map(item => `<li>${item}</li>`).join("")}
+                </ul>
+            </div>
+
+        </div>
         `;
 
     } catch (error) {
