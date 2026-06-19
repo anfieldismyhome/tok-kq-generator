@@ -1,73 +1,108 @@
 async function generateKQ() {
 
-const url =
-    document.getElementById("urlInput").value.trim();
+    const url =
+        document.getElementById("urlInput").value.trim();
 
-const userType =
-    document.getElementById("userType").value;
+    const userType =
+        document.getElementById("userType").value;
 
-const analysisType =
-    document.getElementById("analysisType").value;
+    const analysisType =
+        document.getElementById("analysisType").value;
 
-const sourceType =
-    document.getElementById("sourceType").value;
+    const sourceType =
+        document.getElementById("sourceType").value;
 
-const loading =
-    document.getElementById("loading");
+    const loading =
+        document.getElementById("loading");
 
-const results =
-    document.getElementById("results");
+    const results =
+        document.getElementById("results");
 
-if (!url) {
+    if (!url) {
 
-    results.innerHTML =
-        "<div class='error-box'>Please enter a URL.</div>";
+        results.innerHTML =
+            "<div class='error-box'>Please enter a URL.</div>";
 
-    return;
-}
+        return;
+    }
 
-loading.innerHTML =
-    "Analyzing source...";
+    loading.innerHTML = "Analyzing source...";
 
-results.innerHTML = "";
+    results.innerHTML = "";
 
-try {
+    try {
 
-    const response = await fetch(
-        "https://tok-kq-worker.zubinjcoach.workers.dev/",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                url,
-                userType,
-                analysisType,
-                sourceType
-            })
+        const response = await fetch(
+            "https://tok-kq-worker.zubinjcoach.workers.dev/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    url,
+                    userType,
+                    analysisType,
+                    sourceType
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        loading.innerHTML = "";
+
+        let html = "";
+
+        if (data.sourceTitle) {
+
+            html += `
+                <div class="result-section">
+                    <h2>${data.sourceTitle}</h2>
+                    <p>${data.summary || ""}</p>
+                </div>
+            `;
         }
-    );
 
-    const data = await response.json();
+        if (data.sections) {
 
-    loading.innerHTML = "";
+            data.sections.forEach(section => {
 
-    results.innerHTML =
-        "<div class='result-section'><pre>" +
-        JSON.stringify(data, null, 2) +
-        "</pre></div>";
+                html += `
+                    <div class="result-section">
+                        <h2>${section.title}</h2>
+                        <ul>
+                            ${section.items
+                                .map(item => `<li>${item}</li>`)
+                                .join("")}
+                        </ul>
+                    </div>
+                `;
 
-}
+            });
 
-catch (error) {
+        } else {
 
-    loading.innerHTML = "";
+            html += `
+                <div class="error-box">
+                    No sections returned.
+                </div>
+            `;
+        }
 
-    results.innerHTML =
-        "<div class='error-box'>" +
-        error.message +
-        "</div>";
-}
+        results.innerHTML = html;
+
+        console.log(data);
+
+    } catch (error) {
+
+        loading.innerHTML = "";
+
+        results.innerHTML = `
+            <div class="error-box">
+                ${error.message}
+            </div>
+        `;
+    }
 
 }
