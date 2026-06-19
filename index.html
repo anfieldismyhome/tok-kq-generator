@@ -3,21 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOK KQ Generator</title>
+<title>TOK Analyzer</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>TOK Knowledge Question Generator</h1>
+    <h1>TOK Analyzer</h1>
 
     <input
         type="text"
         id="urlInput"
-        placeholder="Paste article, YouTube or PDF URL">
+        placeholder="Paste article, YouTube, PDF, website or news URL">
 
-    <button onclick="generateKQ()">Generate</button>
+    <div class="selection-group">
+
+        <label for="analysisType">
+            Analysis Type
+        </label>
+
+        <select id="analysisType">
+
+            <option value="kq">
+                Knowledge Questions
+            </option>
+
+            <option value="discussion">
+                Classroom Discussion
+            </option>
+
+            <option value="exhibition">
+                Exhibition
+            </option>
+
+            <option value="essay">
+                Essay
+            </option>
+
+            <option value="complete">
+                Complete TOK Analysis
+            </option>
+
+        </select>
+
+    </div>
+
+    <div class="selection-group">
+
+        <label for="sourceType">
+            Source Type
+        </label>
+
+        <select id="sourceType">
+
+            <option value="auto">
+                Auto Detect
+            </option>
+
+            <option value="news">
+                News Article
+            </option>
+
+            <option value="website">
+                Website
+            </option>
+
+            <option value="video">
+                Video
+            </option>
+
+            <option value="research">
+                Research Paper
+            </option>
+
+            <option value="social">
+                Social Media
+            </option>
+
+        </select>
+
+    </div>
+
+    <button onclick="generateKQ()">
+        Generate Analysis
+    </button>
 
     <div id="loading"></div>
 
