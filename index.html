@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,92 +13,116 @@
 
 <div class="container">
 
-    <h1>TOK Analyzer</h1>
+```
+<h1>TOK Analyzer</h1>
+
+<div class="input-section">
+
+    <label>Source URL</label>
 
     <input
         type="text"
         id="urlInput"
-        placeholder="Paste article, YouTube, PDF, website or news URL">
+        placeholder="Paste article, website, YouTube, PDF, research paper or social media URL">
 
-    <div class="selection-group">
+    <div class="controls-grid">
 
-        <label for="analysisType">
-            Analysis Type
-        </label>
+        <div class="control-card">
 
-        <select id="analysisType">
+            <label>User Type</label>
 
-            <option value="kq">
-                Knowledge Questions
-            </option>
+            <select id="userType">
+                <option value="learner">Learner</option>
+                <option value="teacher">Teacher</option>
+            </select>
 
-            <option value="discussion">
-                Classroom Discussion
-            </option>
+        </div>
 
-            <option value="exhibition">
-                Exhibition
-            </option>
+        <div class="control-card">
 
-            <option value="essay">
-                Essay
-            </option>
+            <label>Analysis Type</label>
 
-            <option value="complete">
-                Complete TOK Analysis
-            </option>
+            <select id="analysisType">
 
-        </select>
+                <option value="kq">
+                    Knowledge Questions
+                </option>
 
-    </div>
+                <option value="discussion">
+                    Classroom Discussion
+                </option>
 
-    <div class="selection-group">
+                <option value="exhibition">
+                    Exhibition
+                </option>
 
-        <label for="sourceType">
-            Source Type
-        </label>
+                <option value="essay">
+                    Essay
+                </option>
 
-        <select id="sourceType">
+                <option value="complete">
+                    Complete TOK Analysis
+                </option>
 
-            <option value="auto">
-                Auto Detect
-            </option>
+            </select>
 
-            <option value="news">
-                News Article
-            </option>
+        </div>
 
-            <option value="website">
-                Website
-            </option>
+        <div class="control-card">
 
-            <option value="video">
-                Video
-            </option>
+            <label>Source Type</label>
 
-            <option value="research">
-                Research Paper
-            </option>
+            <select id="sourceType">
 
-            <option value="social">
-                Social Media
-            </option>
+                <option value="auto">
+                    Auto Detect
+                </option>
 
-        </select>
+                <option value="news">
+                    News Article
+                </option>
+
+                <option value="website">
+                    Website
+                </option>
+
+                <option value="youtube">
+                    YouTube Video
+                </option>
+
+                <option value="pdf">
+                    PDF
+                </option>
+
+                <option value="research">
+                    Research Paper
+                </option>
+
+                <option value="social">
+                    Social Media
+                </option>
+
+            </select>
+
+        </div>
 
     </div>
 
     <button onclick="generateKQ()">
-        Generate Analysis
+        Analyze Source
     </button>
 
-    <div id="loading"></div>
+</div>
 
-    <div id="results"></div>
+<div id="loading"></div>
+
+<div id="results"></div>
+```
 
 </div>
 
 <script src="app.js"></script>
 
 </body>
+
 </html>
